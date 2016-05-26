@@ -1,78 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <title>Brian Dunlay - collaboration</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <title>sending - Tag collaboration</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="/theme/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/theme/css/clean-blog.min.css" rel="stylesheet">
+
+        <!-- Code highlight color scheme -->
+            <link href="/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+
+        <!-- Custom Fonts -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+                <meta property="og:locale" content="">
+		<meta property="og:site_name" content="sending">
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Brian Dunlay </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/open-source-collaboration.html">Open Source Collaboration</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-01-27T10:15:00-08:00">
-                Published: Tue 27 January 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-01-27T10:15:00-08:00">
-                Updated: Tue 27 January 2015
-        </abbr>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">sending</a>
+            </div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/brian-dunlay.html">Brian Dunlay</a>
-        </address>
-<p>In <a href="/category/projects.html">projects</a>. </p>
-<p>tags: <a href="/tag/github.html">github</a> <a href="/tag/open-source.html">open source</a> <a href="/tag/collaboration.html">collaboration</a> <a href="/tag/hacking.html">hacking</a> <a href="/tag/python.html">python</a> <a href="/tag/iot.html">iot</a> </p>
-</footer><!-- /.post-info --><p>Recently, I've started collaborating on some open-source projects. It's the first time I've ever ventured into the world of collaborative software development outside of a professional or academic setting, and it's really fun!</p>
-<h2>Wireless Lightbulbs</h2>
-<p>It all started when I bought some wireless lightbulbs. They come with a gateway (which runs Linux) that runs a local server through which a mobile app can issue commands to the bulbs. </p>
-<p>Of course, using a mobile app to control your lightbulbs is insane. It's way easier and faster to use a switch on the wall.</p>
-<p>I started digging and found some resources for node.js and python. Other enthusiasts had begun to control the bulbs and even added their own features on top (e.g. sunrise) via their unofficial APIs.</p>
-<p>I began developing further the python module, and was soon invited to collaborate with the python dev. Things were silent and stable for a few months.</p>
-<h2>Breaking Update, Community to the Rescue</h2>
-<p>The company that sells the gateway decided to push a "security update" out of the blue one day, and ended up breaking everyone's DIY projects. I was pretty upset at first (they'd broken my sunrise, taken away root access, and done it all without my permission). I called and then sent a follow up email, but they seem to have ignored me for the most part.</p>
-<p>Once I got over myself, I began searching Twitter and found that the node.js library had been updated recently -- following that trail, I discovered that the developer had reverse engineered the new protocol and was able to make his library work again. </p>
-<p>With the explanations on his blog, I was able to patch the python library and am back up and running again.</p>
-<p>I've been emailing with the developer of the python library and the developer of the node.js library, discussing features, reverse engineering techniques, etc, and it's been awesome to push these parallel projects farther along. </p>
-<h2>Coding Under the Microscope</h2>
-<p>It's a little scary putting my code out there for others to see (and I will be the first to say I'm a little weary of what I've contributed so far). It feels personal, much like writing this blog. People can see how I think, are easily able to criticize my ideas, and (oh no!!) might form some opinions about me and my intellectual abilities. That's a little scary. </p>
-<p>But then again... who cares? It's a good exercise for me to make myself vulnerable and do something that scares me. Criticism and feedback will help me grow.</p>
-<p>And even if the code is terrible at first, at least I'm doing it rather than not. As time goes on and with more eyeballs, things will improve. That's how the learning process goes. The point of these projects isn't to be perfect, but to make something, learn something, and have fun doing it. So far I am achieving these goals!</p>
-<p>You can check out my first real collaborate project on github at <a href="http://github.com/therivenman/pygop">http://github.com/therivenman/pygop</a>.</p>                </article>
-<p class="paginator">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="/pages/about.html">About</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+        <header class="intro-header" style="background-image: url('/theme/images/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Tag collaboration</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-preview">
+            <a href="/open-source-collaboration.html" rel="bookmark" title="Permalink to Open Source Collaboration">
+                <h2 class="post-title">
+                    Open Source Collaboration
+                </h2>
+            </a>
+                Recently, I've started collaborating on some open-source projects. It's the first time I've ever ventured into the world of ...
+            <p class="post-meta">Posted by
+                    <a href="/author/brian-d.html">Brian D</a>
+                 on Tue 27 January 2015
+            </p>
+        </div>
+
+    <hr>
+    <!-- Pager -->
+    <ul class="pager">
+        <li class="next">
+        </li>
+    </ul>
     Page 1 / 1
-</p>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+    <hr>
+            </div>
+        </div>
+    </div>
 
-                            <li><a href="http://twitter.com/_i3d">Twitter</a></li>
-                            <li><a href="http://linkedin.com/in/briandunlay">LinkedIn</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    <hr>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                            <li>
+                                <a href="http://twitter.com/_i3d">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://linkedin.com/in/briandunlay">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                    </ul>
+<p class="copyright text-muted">
+    Blog powered by <a href="http://getpelican.com">Pelican</a>,
+    which takes great advantage of <a href="http://python.org">Python</a>.
+</p>                </div>
+            </div>
+        </div>
+    </footer>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+    <!-- jQuery -->
+    <script src="/theme/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/theme/js/bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/clean-blog.min.js"></script>
 
     <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -85,4 +157,5 @@
     })();
     </script>
 </body>
+
 </html>
