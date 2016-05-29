@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-        <meta charset="utf-8">
+            <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>sending - Tags</title>
+        <title>Stack SMASH</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/theme/css/bootstrap.min.css" rel="stylesheet">
@@ -31,8 +31,28 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-                <meta property="og:locale" content="">
+
+
+        <meta name="description" content="I'm writing an application for my UW Embedded Systems class. The project is to read IMU sensor data, fuse it together, and report the ...">
+
+        <meta name="author" content="Brian D">
+
+        <meta name="tags" content="programming">
+        <meta name="tags" content="C">
+        <meta name="tags" content="embedded systems">
+        <meta name="tags" content="gdb">
+
+	                <meta property="og:locale" content="">
 		<meta property="og:site_name" content="sending">
+
+	<meta property="og:type" content="article">
+            <meta property="article:author" content="/author/brian-d.html">
+	<meta property="og:url" content="/stack-smash.html">
+	<meta property="og:title" content="Stack SMASH">
+	<meta property="article:published_time" content="2016-05-28 23:59:00-07:00">
+            <meta property="og:description" content="I'm writing an application for my UW Embedded Systems class. The project is to read IMU sensor data, fuse it together, and report the ...">
+
+            <meta property="og:image" content="/theme/images/post-bg.jpg">
 </head>
 
 <body>
@@ -64,12 +84,17 @@
     </nav>
 
     <!-- Page Header -->
-        <header class="intro-header" style="background-image: url('/theme/images/home-bg.jpg')">
+        <header class="intro-header" style="background-image: url('/theme/images/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>sending - Tags</h1>
+                        <h1>Stack SMASH</h1>
+                        <span class="meta">Posted by
+                                <a href="/author/brian-d.html">Brian D</a>
+                             on Sat 28 May 2016
+                        </span>
+                        
                     </div>
                 </div>
             </div>
@@ -80,24 +105,57 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <h1>Tags for sending</h1>        <li><a href="/tag/.html"></a> (4)</li>
-        <li><a href="/tag/c.html">C</a> (1)</li>
-        <li><a href="/tag/career.html">career</a> (5)</li>
-        <li><a href="/tag/collaboration.html">collaboration</a> (1)</li>
-        <li><a href="/tag/embedded-systems.html">embedded systems</a> (1)</li>
-        <li><a href="/tag/gdb.html">gdb</a> (1)</li>
-        <li><a href="/tag/github.html">github</a> (1)</li>
-        <li><a href="/tag/goals.html">goals</a> (1)</li>
-        <li><a href="/tag/growth.html">growth</a> (1)</li>
-        <li><a href="/tag/hacking.html">hacking</a> (1)</li>
-        <li><a href="/tag/iot.html">iot</a> (1)</li>
-        <li><a href="/tag/microsoft.html">microsoft</a> (2)</li>
-        <li><a href="/tag/motivation.html">motivation</a> (1)</li>
-        <li><a href="/tag/open-source.html">open source</a> (1)</li>
-        <li><a href="/tag/passion.html">passion</a> (1)</li>
-        <li><a href="/tag/programming.html">programming</a> (1)</li>
-        <li><a href="/tag/python.html">python</a> (1)</li>
-        <li><a href="/tag/startups.html">startups</a> (1)</li>
+    <!-- Post Content -->
+    <article>
+        <p>I'm writing an application for my UW Embedded Systems class. The project is to read IMU sensor data, fuse it together, and report the data on an LCD or over bluetooth (or both).</p>
+<p>I spent a lot of today trying to read data and pass it between tasks in FreeRTOS and learned a couple of things.</p>
+<h2>Stack Smashing</h2>
+<p>I ended up smashing my stack a lot today, but didn't know it until many hours too late. My program would just crash inexplicably and end up in the HardFault handler. In order to retry I'd have to reset the device, reload gdb, etc. I couldn't figure out the root cause and spent the better part of a day limping along.</p>
+<p>Then I finally figured it out, after allocating a 100 char buffer -- I checked my stack size and it hit me. 128 bytes. Definitely not gonna cut it.</p>
+<p>Small lesson, but one definitely learned.</p>
+<h2>sprintf</h2>
+<p>This is more of a RTFM sort of lesson. Spent some time painfully trying to print stuff out over UART today. Realized late this evening that I can use sprintf to print a formatted string to a buffer and then send that whole thing out over UART rather than trying to clobber things together in multiple calls. Much cleaner! Still need to figure out how adjust the internals of printf to just print out over UART instead of stdout, but that's low priority right now.</p>
+<h2>functions in gdb</h2>
+<p>This is one of my favorite. You can define functions in gdb! Here's a simple example.</p>
+<p>Say you set a breakpoint, and you want to continue the program execution back to that breakpoint and then print out a local variable. You want to repeat that a few times to watch it change. It's two commands (after you've set the breakpoint):</p>
+<div class="highlight"><pre>print myData
+c
+</pre></div>
+
+
+<p>You can toggle the history (up arrow) to achieve this, which isn't too hard, or you can define both functions in one line:</p>
+<div class="highlight"><pre>(gdb) def loopnprint
+Type commands for definition of &quot;loopnprint&quot;.
+End with a line saying just &quot;end&quot;.
+&gt;print i
+&gt;c
+&gt;end
+(gdb) loopnprint
+$1 = 0
+
+Breakpoint 2, StartFuseSensorTask (argument=0x0) at Src/main.c:341
+$2 = 1
+
+Breakpoint 2, StartFuseSensorTask (argument=0x0) at Src/main.c:341
+$3 = 2
+
+Breakpoint 2, StartFuseSensorTask (argument=0x0) at Src/main.c:341
+(gdb)
+</pre></div>
+
+
+<p>Now all you have to do is hit enter!</p>
+    </article>
+
+        <div class="tags">
+            <p>tags: <a href="/tag/programming.html">programming</a>, <a href="/tag/c.html">C</a>, <a href="/tag/embedded-systems.html">embedded systems</a>, <a href="/tag/gdb.html">gdb</a></p>
+        </div>
+
+<hr>
+<div class="sharing">
+</div>
+    <hr>
+
             </div>
         </div>
     </div>
